@@ -8,7 +8,7 @@ A complete REST API built with Express.js and MongoDB to learn CRUD operations.
 - Learn HTTP methods: GET, POST, PUT, PATCH, DELETE
 - Work with Express.js and MVC pattern
 - Connect to MongoDB
-- Use the Fetch API to interact with the API
+- Interact with the API using Fetch, curl, or the VS Code REST Client
 
 ## 📁 Project Structure
 
@@ -55,6 +55,9 @@ Or use watch mode for development:
 
 ```bash
 npm run dev
+
+Requirements:
+- Node.js 18+ (for native `--watch` and top‑level await)
 ```
 
 ## 🛠️ API Endpoints
@@ -67,6 +70,12 @@ npm run dev
 | PUT    | `/api/posts/:id` | Update a post (full update)    |
 | PATCH  | `/api/posts/:id` | Update a post (partial update) |
 | DELETE | `/api/posts/:id` | Delete a post                  |
+
+### Response shape
+
+- Success responses return the raw document (or array) directly.
+- Errors are returned as `{ "error": "message" }` with proper status codes (400, 404, 500).
+- DELETE returns `204 No Content` (no body).
 
 ## 📝 Post Object Structure
 
@@ -149,8 +158,52 @@ console.log(data);
 const response = await fetch("http://localhost:3000/api/posts/POST_ID", {
   method: "DELETE",
 });
-const data = await response.json();
-console.log(data);
+console.log(response.status); // 204
+console.log(response.ok); // true
+```
+
+## 🧪 Testing with curl (optional)
+
+GET all posts:
+
+```bash
+curl http://localhost:3000/api/posts
+```
+
+Create a post:
+
+```bash
+curl -X POST http://localhost:3000/api/posts \
+  -H "Content-Type: application/json" \
+  -d '{"title":"My First Blog Post"}'
+```
+
+Get one:
+
+```bash
+curl http://localhost:3000/api/posts/POST_ID
+```
+
+Update (PUT):
+
+```bash
+curl -X PUT http://localhost:3000/api/posts/POST_ID \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Updated Title"}'
+```
+
+Patch:
+
+```bash
+curl -X PATCH http://localhost:3000/api/posts/POST_ID \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Partially Updated Title"}'
+```
+
+Delete (204 No Content):
+
+```bash
+curl -i -X DELETE http://localhost:3000/api/posts/POST_ID
 ```
 
 ## 🔍 Understanding REST & HTTP Methods
@@ -164,7 +217,7 @@ console.log(data);
 ## 💡 Tips
 
 1. Use the browser console or a separate HTML file to test fetch requests
-2. Check the `test-api.http` file for quick testing with REST Client extension
+2. Use the `test-api.http` file for quick testing with the VS Code REST Client extension
 3. Always check the server console for logs
 4. MongoDB must be running before starting the server
 
