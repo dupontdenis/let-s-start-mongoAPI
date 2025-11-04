@@ -10,22 +10,13 @@ import {
 
 const router = express.Router();
 
-// GET all posts
-router.get("/", getAllPosts);
+router.route("/").get(getAllPosts).post(createPost);
 
-// GET single post by ID
-router.get("/:id", getPostById);
-
-// POST - Create a new post
-router.post("/", createPost);
-
-// PUT - Update a post (full update)
-router.put("/:id", updatePost);
-
-// PATCH - Partial update of a post
-router.patch("/:id", patchPost);
-
-// DELETE - Delete a post
-router.delete("/:id", deletePost);
+router
+  .route("/:id")
+  .get(getPostById)
+  .put(updatePost)
+  .patch(patchPost)
+  .delete(deletePost);
 
 export default router;

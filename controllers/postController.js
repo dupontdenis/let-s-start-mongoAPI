@@ -4,16 +4,9 @@ import { Post } from "../models/Post.js";
 export const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find();
-    res.json({
-      success: true,
-      count: posts.length,
-      data: posts,
-    });
+    res.json(posts);
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -23,21 +16,12 @@ export const getPostById = async (req, res) => {
     const post = await Post.findById(req.params.id);
 
     if (!post) {
-      return res.status(404).json({
-        success: false,
-        error: "Post not found",
-      });
+      return res.status(404).json({ error: "Post not found" });
     }
 
-    res.json({
-      success: true,
-      data: post,
-    });
+    res.json(post);
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -48,25 +32,15 @@ export const createPost = async (req, res) => {
 
     // Validation
     if (!title) {
-      return res.status(400).json({
-        success: false,
-        error: "Title is required",
-      });
+      return res.status(400).json({ error: "Title is required" });
     }
 
     const post = new Post({ title });
     await post.save();
 
-    res.status(201).json({
-      success: true,
-      message: "Post created successfully",
-      data: post,
-    });
+    res.status(201).json(post);
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -77,10 +51,7 @@ export const updatePost = async (req, res) => {
 
     // Validation
     if (!title) {
-      return res.status(400).json({
-        success: false,
-        error: "Title is required",
-      });
+      return res.status(400).json({ error: "Title is required" });
     }
 
     const post = await Post.findByIdAndUpdate(
@@ -90,22 +61,12 @@ export const updatePost = async (req, res) => {
     );
 
     if (!post) {
-      return res.status(404).json({
-        success: false,
-        error: "Post not found",
-      });
+      return res.status(404).json({ error: "Post not found" });
     }
 
-    res.json({
-      success: true,
-      message: "Post updated successfully",
-      data: post,
-    });
+    res.json(post);
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -120,22 +81,12 @@ export const patchPost = async (req, res) => {
     });
 
     if (!post) {
-      return res.status(404).json({
-        success: false,
-        error: "Post not found",
-      });
+      return res.status(404).json({ error: "Post not found" });
     }
 
-    res.json({
-      success: true,
-      message: "Post updated successfully",
-      data: post,
-    });
+    res.json(post);
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -145,21 +96,11 @@ export const deletePost = async (req, res) => {
     const post = await Post.findByIdAndDelete(req.params.id);
 
     if (!post) {
-      return res.status(404).json({
-        success: false,
-        error: "Post not found",
-      });
+      return res.status(404).json({ error: "Post not found" });
     }
 
-    res.json({
-      success: true,
-      message: "Post deleted successfully",
-      data: post,
-    });
+    res.status(204).send();
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      error: error.message,
-    });
+    res.status(500).json({ error: error.message });
   }
 };
