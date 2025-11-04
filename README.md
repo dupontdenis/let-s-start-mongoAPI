@@ -10,6 +10,15 @@ A complete REST API built with Express.js and MongoDB to learn CRUD operations.
 - Connect to MongoDB
 - Interact with the API using Fetch, curl, or the VS Code REST Client
 
+## ✨ Features
+
+- RESTful API with Express.js
+- MongoDB integration with Mongoose
+- CORS enabled for cross-origin requests
+- MVC architecture pattern
+- Clean, simplified response format
+- Top-level await support (ES modules)
+
 ## 📁 Project Structure
 
 ```
@@ -21,8 +30,9 @@ A complete REST API built with Express.js and MongoDB to learn CRUD operations.
 ├── 📁 models/
 │   └── Post.js              # Database schema
 ├── 📁 routes/
-│   └── postRoutes.js        # Route definitions
-├── server.js                # Main app
+│   └── postRoutes.js        # Route definitions (chained)
+├── server.js                # Main app (CORS enabled)
+├── test-api.http            # REST Client test file
 ├── .env                     # Environment variables
 └── package.json
 ```
@@ -58,6 +68,14 @@ npm run dev
 
 Requirements:
 - Node.js 18+ (for native `--watch` and top‑level await)
+- MongoDB running locally or a connection URI
+
+## 🔧 Dependencies
+
+- **express** - Web framework
+- **mongoose** - MongoDB ODM
+- **cors** - Enable Cross-Origin Resource Sharing
+- **dotenv** - Environment variable management
 ```
 
 ## 🛠️ API Endpoints
@@ -216,10 +234,12 @@ curl -i -X DELETE http://localhost:3000/api/posts/POST_ID
 
 ## 💡 Tips
 
-1. Use the browser console or a separate HTML file to test fetch requests
-2. Use the `test-api.http` file for quick testing with the VS Code REST Client extension
-3. Always check the server console for logs
-4. MongoDB must be running before starting the server
+1. **CORS is enabled** - API can be accessed from any origin (browser apps, frontends, etc.)
+2. Use the browser console or a separate HTML file to test fetch requests
+3. Use the `test-api.http` file for quick testing with the VS Code REST Client extension
+4. Always check the server console for logs
+5. MongoDB must be running before starting the server
+6. Routes use chaining for cleaner code organization
 
 ## 📚 Next Steps
 
