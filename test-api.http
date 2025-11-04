@@ -1,0 +1,57 @@
+### This file contains HTTP requests to test your API
+### You can use the REST Client extension in VS Code to run these
+
+### Get all posts
+GET http://localhost:3000/api/posts
+
+###
+
+### Get a single post (replace with actual ID)
+GET http://localhost:3000/api/posts/YOUR_POST_ID_HERE
+
+###
+
+### Create a new post
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "My First Blog Post"
+}
+
+###
+
+### Create another post
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+  "title": "Understanding REST APIs"
+}
+
+###
+
+### Update a post (PUT - full update) - replace with actual ID
+PUT http://localhost:3000/api/posts/YOUR_POST_ID_HERE
+Content-Type: application/json
+
+{
+  "title": "Updated Blog Post Title"
+}
+
+###
+
+### Partial update (PATCH) - replace with actual ID
+PATCH http://localhost:3000/api/posts/YOUR_POST_ID_HERE
+Content-Type: application/json
+
+{
+  "title": "Partially Updated Title"
+}
+
+###
+
+### Delete a post - replace with actual ID
+DELETE http://localhost:3000/api/posts/6909cfa3bc49ff489d294c6c
+
+###
