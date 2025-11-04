@@ -52,6 +52,6 @@ Content-Type: application/json
 ###
 
 ### Delete a post - replace with actual ID
-DELETE http://localhost:3000/api/posts/6909cfa3bc49ff489d294c6c
+DELETE http://localhost:3000/api/posts/6909d804606de23ea24b8707
 
 ###
